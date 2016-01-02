@@ -22,6 +22,7 @@
 #include <QListWidgetItem>
 #include <QPrinter>
 #include <QPrintDialog>
+#include <QTextCodec>
 #include <QDate>
 #include <QVector>
 #include <QDir>
@@ -157,11 +158,17 @@ QString BrewDayWidget::buildTitleTable()
 {
    QString header;
    QString body;
+   QString encoding;
 
-   // Do the style sheet first
-   header = "<html><head><style type=\"text/css\">";
+   // Creates the encoding for the html:
+   encoding = QTextCodec::codecForLocale()->name();
+   header = "<html>\n<head>\n";
+   header += QString("<meta charset=\"%1\">\n").arg(encoding);
+
+   // Add the style sheet
+   header += "<style type=\"text/css\">";
    header += getCSS();
-   header += "</style></head>";
+   header += "</style>\n</head>\n";
 
    body   = "<body>";
    body += QString("<h1>%1</h1>").arg(recObs->name());

@@ -36,6 +36,7 @@
 #include <QObject>
 #include <QPrinter>
 #include <QPrintDialog>
+#include <QTextCodec>
 #include <QTextDocument>
 #include <QPushButton>
 #include <QVBoxLayout>
@@ -235,6 +236,7 @@ QString RecipeFormatter::getToolTip(Recipe* rec)
 {
    QString header;
    QString body;
+   QString encoding;
 
    Style* style = 0;
 
@@ -244,10 +246,15 @@ QString RecipeFormatter::getToolTip(Recipe* rec)
    cssName = QString(":/css/tooltip.css");
    style = rec->style();
 
-   // Do the style sheet first
-   header = "<html><head><style type=\"text/css\">";
+   // Creates the encoding for the html:
+   encoding = QTextCodec::codecForLocale()->name();
+   header = "<html>\n<head>\n";
+   header += QString("<meta charset=\"%1\">\n").arg(encoding);
+
+   // Add the style sheet
+   header += "<style type=\"text/css\">";
    header += getCSS();
-   header += "</style></head>";
+   header += "</style>\n</head>\n";
 
    body   = "<body>";
    //body += QString("<h1>%1</h1>").arg(rec->getName()());
@@ -286,16 +293,22 @@ QString RecipeFormatter::getToolTip(Style* style)
 {
    QString header;
    QString body;
+   QString encoding;
 
    if ( style == 0 )
       return "";
 
    cssName = QString(":/css/tooltip.css");
 
-   // Do the style sheet first
-   header = "<html><head><style type=\"text/css\">";
+   // Creates the encoding for the html:
+   encoding = QTextCodec::codecForLocale()->name();
+   header = "<html>\n<head>\n";
+   header += QString("<meta charset=\"%1\">\n").arg(encoding);
+
+   // Add the style sheet
+   header += "<style type=\"text/css\">";
    header += getCSS();
-   header += "</style></head>";
+   header += "</style>\n</head>\n";
 
    body   = "<body>";
 
@@ -331,16 +344,22 @@ QString RecipeFormatter::getToolTip(Equipment* kit)
 {
    QString header;
    QString body;
+   QString encoding;
 
    if ( kit == 0 )
       return "";
 
    cssName = QString(":/css/tooltip.css");
 
-   // Do the style sheet first
-   header = "<html><head><style type=\"text/css\">";
+   // Creates the encoding for the html:
+   encoding = QTextCodec::codecForLocale()->name();
+   header = "<html>\n<head>\n";
+   header += QString("<meta charset=\"%1\">\n").arg(encoding);
+
+   // Add the style sheet
+   header += "<style type=\"text/css\">";
    header += getCSS();
-   header += "</style></head>";
+   header += "</style>\n</head>\n";
 
    body   = "<body>";
 
@@ -368,16 +387,22 @@ QString RecipeFormatter::getToolTip(Fermentable* ferm)
 {
    QString header;
    QString body;
+   QString encoding;
 
    if ( ferm == 0 )
       return "";
 
    cssName = QString(":/css/tooltip.css");
 
-   // Do the style sheet first
-   header = "<html><head><style type=\"text/css\">";
+   // Creates the encoding for the html:
+   encoding = QTextCodec::codecForLocale()->name();
+   header = "<html>\n<head>\n";
+   header += QString("<meta charset=\"%1\">\n").arg(encoding);
+
+   // Add the style sheet
+   header += "<style type=\"text/css\">";
    header += getCSS();
-   header += "</style></head>";
+   header += "</style>\n</head>\n";
 
    body   = "<body>";
 
@@ -411,16 +436,22 @@ QString RecipeFormatter::getToolTip(Hop* hop)
 {
    QString header;
    QString body;
+   QString encoding;
 
    if ( hop == 0 )
       return "";
 
    cssName = QString(":/css/tooltip.css");
 
-   // Do the style sheet first
-   header = "<html><head><style type=\"text/css\">";
+   // Creates the encoding for the html:
+   encoding = QTextCodec::codecForLocale()->name();
+   header = "<html>\n<head>\n";
+   header += QString("<meta charset=\"%1\">\n").arg(encoding);
+
+   // Add the style sheet
+   header += "<style type=\"text/css\">";
    header += getCSS();
-   header += "</style></head>";
+   header += "</style>\n</head>\n";
 
    body   = "<body>";
 
@@ -455,16 +486,22 @@ QString RecipeFormatter::getToolTip(Misc* misc)
 {
    QString header;
    QString body;
+   QString encoding;
 
    if ( misc == 0 )
       return "";
 
    cssName = QString(":/css/tooltip.css");
 
-   // Do the style sheet first
-   header = "<html><head><style type=\"text/css\">";
+   // Creates the encoding for the html:
+   encoding = QTextCodec::codecForLocale()->name();
+   header = "<html>\n<head>\n";
+   header += QString("<meta charset=\"%1\">\n").arg(encoding);
+
+   // Add the style sheet
+   header += "<style type=\"text/css\">";
    header += getCSS();
-   header += "</style></head>";
+   header += "</style>\n</head>\n";
 
    body   = "<body>";
 
@@ -491,16 +528,22 @@ QString RecipeFormatter::getToolTip(Yeast* yeast)
 {
    QString header;
    QString body;
+   QString encoding;
 
    if ( yeast == 0 )
       return "";
 
    cssName = QString(":/css/tooltip.css");
 
-   // Do the style sheet first
-   header = "<html><head><style type=\"text/css\">";
+   // Creates the encoding for the html:
+   encoding = QTextCodec::codecForLocale()->name();
+   header = "<html>\n<head>\n";
+   header += QString("<meta charset=\"%1\">\n").arg(encoding);
+
+   // Add the style sheet
+   header += "<style type=\"text/css\">";
    header += getCSS();
-   header += "</style></head>";
+   header += "</style>\n</head>\n";
 
    body   = "<body>";
 
@@ -637,16 +680,22 @@ QString RecipeFormatter::buildStatTableHtml()
    QString header;
    QString body;
    Style* style = 0;
+   QString encoding;
 
    if ( rec == 0 )
       return "";
 
    style = rec->style();
 
-   // Do the style sheet first
-   header = "<html><head><style type=\"text/css\">";
+   // Creates the encoding for the html:
+   encoding = QTextCodec::codecForLocale()->name();
+   header = "<html>\n<head>\n";
+   header += QString("<meta charset=\"%1\">\n").arg(encoding);
+
+   // Add the style sheet
+   header += "<style type=\"text/css\">";
    header += getCSS();
-   header += "</style></head>";
+   header += "</style>\n</head>\n";
 
    body   = "<body>";
    //body += QString("<h1>%1</h1>").arg(rec->getName()());
