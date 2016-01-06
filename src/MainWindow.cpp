@@ -1065,6 +1065,7 @@ void MainWindow::exportRecipe()
 {
    QFile* outFile;
    QDomDocument doc;
+   QString encoding;
 
    if( recipeObs == 0 )
       return;
@@ -1075,7 +1076,8 @@ void MainWindow::exportRecipe()
 
    QTextStream out(outFile);
 
-   QString xmlHead = QString("version=\"1.0\" encoding=\"ISO-8859-1\"");
+   encoding = QTextCodec::codecForLocale()->name();
+   QString xmlHead = QString("version=\"1.0\" encoding=\"%1\"").arg(encoding);
 
    // Create the headers to make other BeerXML parsers happy
    QDomProcessingInstruction inst = doc.createProcessingInstruction("xml", xmlHead);
